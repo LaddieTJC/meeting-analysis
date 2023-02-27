@@ -10,6 +10,7 @@ from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
 st.set_page_config(layout="wide")
 openai.api_key = st.secrets['openai']
+nltk.download('punkt')
 
 @st.cache_resource
 def load_model():
