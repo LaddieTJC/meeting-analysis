@@ -22,7 +22,7 @@ tokenizer, model = load_model()
 prompt_dict = {
     'Topic Analysis': 'Extract topics from the meeting notes: ',
     'Action Items Extraction':'Extract action items from this meeting notes and return in an ordered list: ',
-    'Sentiment Analysis': 'Do sentiment analysis and extract sentences that contribute to the sentiment on this meeting notes: ' 
+    'Sentiment Analysis': 'Perform sentiment analysis and extract sentences that contributed to the sentiment for this meeting note: ' 
 }
 
 def meetingNotesAnalysis(notes,type):
@@ -32,13 +32,13 @@ def meetingNotesAnalysis(notes,type):
                     model = "text-davinci-003",
                     prompt = prompt,
                     max_tokens = 100)
-        return type +":\n" + response['choices'][0]['text']
+        return response['choices'][0]['text']
     else: 
         inputs = tokenizer(notes, max_length=512, truncation=True, return_tensors="pt")
         output = model.generate(**inputs, num_beams=8, do_sample=True, min_length=10, max_length=32)
         decoded_output = tokenizer.batch_decode(output, skip_special_tokens=True)[0]
         predicted_title = nltk.sent_tokenize(decoded_output.strip())[0]
-        return type +":\n" + predicted_title
+        return predicted_title
 
 
 
