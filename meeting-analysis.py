@@ -21,7 +21,7 @@ def load_model():
 tokenizer, model = load_model()
 prompt_dict = {
     'Topic Analysis': 'Extract topics from the meeting notes: ',
-    'Action Items Extraction':'Extract action items from this meeting notes and return in list form: ',
+    'Action Items Extraction':'Extract action items from this meeting notes and return in an ordered list: ',
     'Sentiment Analysis': 'Do sentiment analysis and extract sentences that contribute to the sentiment on this meeting notes: ' 
 }
 
@@ -55,7 +55,7 @@ with st.container():
         if input_text and options:
             with col2:
                 for i in options:
-                    st.write(meetingNotesAnalysis(input_text,type=i))
+                    st.markdown(f":blue[{i}]: "+meetingNotesAnalysis(input_text,type=i))
 
                 # inputs = ["summarize: " + input_text]
                 # inputs = tokenizer(inputs, max_length=512, truncation=True, return_tensors="pt")
