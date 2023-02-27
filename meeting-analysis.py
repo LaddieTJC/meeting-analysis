@@ -9,7 +9,7 @@ from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
 
 st.set_page_config(layout="wide")
-openai.api_key = "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" 
+openai.api_key = st.secrets['openai']
 
 @st.cache_resource
 def load_model():
